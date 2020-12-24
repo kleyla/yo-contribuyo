@@ -52,7 +52,7 @@ const Form = (props) => {
   };
   const searchRepositories = () => {
     console.log("Click");
-    props.getRepositories();
+    props.getRepositories(language, label);
   };
   useEffect(() => {
     getLanguages();
@@ -61,7 +61,7 @@ const Form = (props) => {
   return (
     <form>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} sm={5} md={5}>
           <FormControl className={classes.formControl}>
             <InputLabel shrink id="language-input-id">
               Lenguaje/Tecnologia
@@ -79,7 +79,7 @@ const Form = (props) => {
               </MenuItem>
               {languages.map((item) => {
                 return (
-                  <MenuItem key={item.id} value={item.id}>
+                  <MenuItem key={item.id} value={item.name}>
                     {item.name}
                   </MenuItem>
                 );
@@ -88,7 +88,7 @@ const Form = (props) => {
             <FormHelperText>Some important helper text</FormHelperText>
           </FormControl>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} sm={5} md={5}>
           <FormControl className={classes.formControl}>
             <InputLabel shrink id="label-input-id">
               Label
@@ -106,7 +106,7 @@ const Form = (props) => {
               </MenuItem>
               {labels.map((item) => {
                 return (
-                  <MenuItem key={item.id} value={item.id}>
+                  <MenuItem key={item.id} value={item.name}>
                     {item.name}
                   </MenuItem>
                 );
@@ -115,7 +115,7 @@ const Form = (props) => {
             <FormHelperText>Some important helper text</FormHelperText>
           </FormControl>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} sm={2} md={2}>
           <Button
             variant="contained"
             color="primary"
