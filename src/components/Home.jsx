@@ -1,15 +1,16 @@
 import {
   Avatar,
   Card,
+  CardActionArea,
   CardContent,
   CardHeader,
+  Chip,
   Grid,
+  Link,
   Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import Form from "./shared/Form";
-import RepositoryCard from "./shared/RepositoryCard";
-import Languages from "./shared/Languages";
 
 const Home = () => {
   const API = "https://api.github.com/search/repositories?q=";
@@ -48,28 +49,38 @@ const Home = () => {
             {repositories.map((item) => {
               return (
                 <Grid item xs={12} sm={6} md={4} key={item.id}>
-                  <Card >
-                    <CardHeader
-                      avatar={
-                        <Avatar
-                          src={item.owner.avatar_url}
-                          aria-label="recipe"
+                  <Card>
+                    <Link
+                      href={item.html_url}
+                      color="inherit"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <CardActionArea>
+                        <CardHeader
+                          avatar={
+                            <Avatar
+                              src={item.owner.avatar_url}
+                              aria-label="recipe"
+                            />
+                          }
+                          title={item.full_name}
+                          subheader={item.owner.login}
                         />
-                      }
-                      title={item.full_name}
-                      subheader={item.owner.login}
-                    />
-                    <CardContent>
-                      <Languages url={item.languages_url} />
-                      <h3>{item.full_name}</h3>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        {item.html_url}
-                      </Typography>
-                    </CardContent>
+                        <CardContent>
+                          {item.language && <Chip label={item.language} />}
+
+                          <h3>{item.full_name}</h3>
+                          <Typography
+                            variant="body2"
+                            color="textSecondary"
+                            component="p"
+                          >
+                            {item.html_url}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Link>
                   </Card>
                 </Grid>
               );

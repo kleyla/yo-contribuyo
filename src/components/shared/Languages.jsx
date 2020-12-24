@@ -4,19 +4,23 @@ import React, { useEffect, useState } from "react";
 const Languages = (props) => {
   const [languages, setLanguages] = useState({});
 
-  const getLanguages = () => {
-    fetch(`${props.url}`)
+  const getLanguages = async () => {
+    await fetch(`${props.url}`)
       .then((response) => response.json())
-      .then((data) => setLanguages(data));
+      .then((data) => {
+        // console.log(data);
+        setLanguages(data);
+      });
   };
   useEffect(() => {
     getLanguages();
   }, []);
   return (
     <>
-      {/* {languages.map((item) => {
-        return <Chip label={item.value} />;
-      })} */}
+      {Object.keys(languages).forEach(function (key) {
+        return <Chip label={key} />;
+        // console.table("Key : " + key + ", Value : " + languages[key]);
+      })}
     </>
   );
 };
