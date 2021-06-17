@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useStyles } from "./../../hooks/useStyles";
-import { db } from "./../../database/firebase";
+import { db } from "../../firebase/firebase-config";
 
 const Form = (props) => {
   const classes = useStyles();

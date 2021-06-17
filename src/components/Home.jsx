@@ -15,7 +15,7 @@ import React, { useEffect, useState } from "react";
 import Form from "./shared/Form";
 import { useStyles } from "./../hooks/useStyles";
 
-const Home = () => {
+export const Home = () => {
   const classes = useStyles();
   const API = "https://api.github.com/search/repositories?q=";
   const [loading, setLoading] = useState(true);
@@ -112,4 +112,3 @@ const Home = () => {
   );
 };
 
-export default Home;

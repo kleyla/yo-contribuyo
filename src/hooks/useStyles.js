@@ -1,6 +1,19 @@
 import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
+  // App
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: theme.palette.background.default,
+  },
+  toolbar: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    minHeight: "100vh",
+    height: "100%",
+    padding: theme.spacing(3),
+  },
   // Navbar
   titleAppBar: {
     textDecoration: "none",
@@ -60,5 +73,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
+  },
+
+  button: {
+    margin: theme.spacing(1),
   },
 }));
