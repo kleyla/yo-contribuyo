@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import { useStyles } from "./../../hooks/useStyles";
 import { db } from "../../firebase/firebase-config";
 
-const Form = (props) => {
+export const Form = (props) => {
   const classes = useStyles();
   const [language, setLanguageSelected] = useState("");
   const [languages, setLanguages] = useState([]);
@@ -22,10 +22,12 @@ const Form = (props) => {
     setLanguageSelected(event.target.value);
     console.log(event.target.value);
   };
+
   const handleChangeLabel = (event) => {
     setLabel(event.target.value);
     console.log(event.target.value);
   };
+
   const getLanguages = () => {
     let docs = new Array();
     db.collection("languages").onSnapshot((querySnapshot) => {
@@ -38,6 +40,7 @@ const Form = (props) => {
       setLanguages(docs);
     });
   };
+
   const getLabels = () => {
     let docs = new Array();
     db.collection("labels").onSnapshot((querySnapshot) => {
@@ -50,14 +53,17 @@ const Form = (props) => {
       setLabels(docs);
     });
   };
+
   const searchRepositories = () => {
     console.log("Click");
     props.getRepositories(language, label);
   };
+
   useEffect(() => {
     getLanguages();
     getLabels();
   }, []);
+
   return (
     <form>
       <Grid container spacing={2}>
@@ -128,5 +134,3 @@ const Form = (props) => {
     </form>
   );
 };
-
-export default Form;

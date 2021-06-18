@@ -12,10 +12,11 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import { Form } from "./shared/Form";
-import { useStyles } from "./../hooks/useStyles";
 
-export const Home = () => {
+import { useStyles } from "../../hooks/useStyles";
+import { Form } from "../shared/Form";
+
+export const Projects = () => {
   const classes = useStyles();
   const API = "https://api.github.com/search/repositories?q=";
   const [loading, setLoading] = useState(true);
@@ -40,7 +41,7 @@ export const Home = () => {
     fetch(`${API}good-first-issues:>1`)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         setRepositories(data.items);
         setLoading(false);
       });

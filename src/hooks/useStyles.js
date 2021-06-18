@@ -78,4 +78,11 @@ export const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
   },
+  // Card
+  rootCard: {
+    minWidth: 275,
+  },
+  titleCard: {
+    fontSize: 14,
+  },
 }));

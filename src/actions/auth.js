@@ -7,8 +7,6 @@ export const startGithubLogin = () => {
       .auth()
       .signInWithPopup(githubAuthProvider)
       .then(({ user }) => {
-        console.log(user);
-        console.log(user.uid, user.displayName);
         dispatch(login(user.uid, user.displayName));
       })
       .catch((error) => {

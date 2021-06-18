@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
+import { Button, Box, Card, CardContent, Typography } from "@material-ui/core";
 import GitHub from "@material-ui/icons/GitHub";
 
 import { useStyles } from "../../hooks/useStyles";
@@ -16,17 +16,34 @@ export const LoginScreen = () => {
   };
 
   return (
-    <div>
-      <p>LoginScreen</p>
-      <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        startIcon={<GitHub />}
-        onClick={handleGithubLogin}
-      >
-        Log in with Github
-      </Button>
-    </div>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Card className={classes.rootCard}>
+        <CardContent>
+          <Typography
+            className={classes.titleCard}
+            color="textSecondary"
+            gutterBottom
+          >
+            Word of the Day
+          </Typography>
+          <Typography variant="h5" component="h2">
+            Log in
+          </Typography>
+          <Button
+            variant="outlined"
+            className={classes.button}
+            startIcon={<GitHub />}
+            onClick={handleGithubLogin}
+          >
+            Log in with Github
+          </Button>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
