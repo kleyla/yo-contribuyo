@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   AppBar,
+  Avatar,
   Button,
   Toolbar,
   IconButton,
@@ -13,10 +14,12 @@ import { useDispatch } from "react-redux";
 
 import { useStyles } from "../../hooks/useStyles";
 import { startLogout } from "../../actions/auth";
+import { useSelector } from "react-redux";
 
 export const Navbar = ({ isAuthenticated }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { name, photoURL } = useSelector((state) => state.auth);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -66,7 +69,7 @@ export const Navbar = ({ isAuthenticated }) => {
               onClick={handleMenu}
               color="inherit"
             >
-              <AccountCircle />
+              <Avatar alt="Remy Sharp" src={photoURL} />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -85,7 +88,7 @@ export const Navbar = ({ isAuthenticated }) => {
             >
               <MenuItem onClick={handleClose}>Perfil</MenuItem>
               <MenuItem onClick={handleClose}>Mi avace</MenuItem>
-              <MenuItem onClick={handleLogout}>My account</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </div>
         ) : (

@@ -6,19 +6,24 @@ export const startGithubLogin = () => {
     firebase
       .auth()
       .signInWithPopup(githubAuthProvider)
-      .then(({ user }) => {
-        dispatch(login(user.uid, user.displayName));
+      .then((result) => {
+        const token = result.credential.accessToken;
+        const user = result.user;
+        dispatch(login(user.uid, user.displayName, user.photoURL, token));
       })
       .catch((error) => {
         console.log(error);
       });
   };
 };
-export const login = (uid, displayName) => ({
+
+export const login = (uid, displayName, photoURL, token) => ({
   type: types.login,
   payload: {
     uid,
     displayName,
+    photoURL,
+    token,
   },
 });
 
