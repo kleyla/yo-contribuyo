@@ -11,44 +11,66 @@ import {
   Link,
   Typography,
 } from "@material-ui/core";
+import { Octokit } from "@octokit/core";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { useStyles } from "../../hooks/useStyles";
 import { Form } from "../shared/Form";
 
 export const Projects = () => {
   const classes = useStyles();
+  const { name, token } = useSelector((state) => state.auth);
+  const octokit = new Octokit({ auth: `${token}` });
+
   const API = "https://api.github.com/search/repositories?q=";
   const [loading, setLoading] = useState(true);
   const [repositories, setRepositories] = useState([]);
-  const getRepositories = (language, label) => {
+
+  const getRepositories = async (language, label) => {
     if (language != "" || label != "") {
-      setLoading(true);
+      const reps = await Octokit.request("GET /search/repositories", {
+        q: `language:${language}`,
+      });
+      console.log("reps", reps);
+      setRepositories(reps.item);
+
       const url = `${API}language:${language} good-first-issues:>1 help-wanted-issues:>1`;
-      console.log(url);
+
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.items);
-          setRepositories(data.items);
-          setLoading(false);
+          // console.log(data.items);
         });
     } else {
       console.log("Campos vacios!");
     }
   };
+
   const getGoodFirstIssues = () => {
     fetch(`${API}good-first-issues:>1`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setRepositories(data.items);
-        setLoading(false);
+        // setLoading(false);
       });
   };
 
+  const getFicctColaboraRepos = async () => {
+    const reps2 = await octokit.request("GET /search/repositories", {
+      q: "ficct-colabora",
+    });
+    console.log("reps2", reps2);
+  };
+
   useEffect(() => {
-    getGoodFirstIssues();
+    setLoading(true);
+
+    // getGoodFirstIssues();
+    getFicctColaboraRepos();
+
+    setLoading(false);
   }, []);
 
   return (

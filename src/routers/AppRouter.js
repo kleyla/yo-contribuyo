@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Container } from "@material-ui/core";
 
@@ -13,7 +8,7 @@ import { login } from "../actions/auth";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { Home } from "../components/Home";
-import { firebase } from "../firebase/firebase-config";
+import { db, firebase } from "../firebase/firebase-config";
 import { Main } from "../pages/Main";
 import { Navbar } from "../components/navbar/Navbar";
 import { useStyles } from "../hooks/useStyles";
@@ -30,10 +25,17 @@ export const AppRouter = () => {
   useEffect(() => {
     // la sgte linea crea un obserbable que se puede disparar mas de una vez
     firebase.auth().onAuthStateChanged(async (user) => {
-      // console.log(user);
       if (user?.uid) {
-        dispatch(login(user.uid, user.displayName));
-        setIsLoggedIn(true);
+        db.collection("users")
+          .doc(user.uid)
+          .get()
+          .then((doc) => {
+            console.log(doc.data());
+            dispatch(
+              login(user.uid, user.displayName, user.photoURL, doc.data().token)
+            );
+            setIsLoggedIn(true);
+          });
       } else {
         setIsLoggedIn(false);
       }

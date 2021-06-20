@@ -11,7 +11,6 @@ export const LoginScreen = () => {
   const dispatch = useDispatch();
 
   const handleGithubLogin = () => {
-    console.log("handleGithubLogin");
     dispatch(startGithubLogin());
   };
 
