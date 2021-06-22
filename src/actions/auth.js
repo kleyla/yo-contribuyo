@@ -13,6 +13,7 @@ export const startGithubLogin = () => {
           .then((result) => {
             const token = result.credential.accessToken;
             const user = result.user;
+            // console.log(user);
             saveToken(user.uid, token);
             dispatch(login(user.uid, user.displayName, user.photoURL, token));
           });
@@ -29,13 +30,14 @@ const saveToken = (uid, token) => {
   });
 };
 
-export const login = (uid, displayName, photoURL, token) => ({
+export const login = (uid, displayName, photoURL, token, nick = "") => ({
   type: types.login,
   payload: {
     uid,
     displayName,
     photoURL,
     token,
+    nick,
   },
 });
 
