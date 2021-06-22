@@ -8,6 +8,7 @@ import {
   Select,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+
 import { useStyles } from "./../../hooks/useStyles";
 import { db } from "../../firebase/firebase-config";
 
@@ -55,7 +56,6 @@ export const Form = (props) => {
   };
 
   const searchRepositories = () => {
-    console.log("Click");
     props.getRepositories(language, label);
   };
 

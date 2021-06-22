@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core";
+import { deepOrange, green } from "@material-ui/core/colors";
 
 export const useStyles = makeStyles((theme) => ({
   // App
@@ -29,12 +30,15 @@ export const useStyles = makeStyles((theme) => ({
   space: {
     flexGrow: 1,
   },
+  // Spinner
   spinner: {
     width: "100%",
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
     marginTop: "16px",
   },
+
   card: {
     backgroundColor: theme.palette.background.paper,
     color: theme.palette.common.white,
@@ -84,5 +88,27 @@ export const useStyles = makeStyles((theme) => ({
   },
   titleCard: {
     fontSize: 14,
+  },
+  rootCardProfile: {
+    marginTop: "70px",
+    overflow: "visible",
+    minWidth: 275,
+  },
+  picProfile: {
+    width: theme.spacing(20),
+    height: theme.spacing(20),
+    boxShadow: theme.shadows[3],
+    margin: "-90px auto 0",
+    position: "relative",
+    zIndex: 1000,
+  },
+  // Colors
+  green: {
+    color: "#fff",
+    backgroundColor: green[500],
+  },
+  orange: {
+    color: theme.palette.getContrastText(deepOrange[500]),
+    backgroundColor: deepOrange[500],
   },
 }));
