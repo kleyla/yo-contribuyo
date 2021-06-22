@@ -92,7 +92,7 @@ export const useStyles = makeStyles((theme) => ({
   rootCardProfile: {
     marginTop: "70px",
     overflow: "visible",
-    minWidth: 275,
+    minWidth: 200,
   },
   picProfile: {
     width: theme.spacing(20),
@@ -110,5 +110,8 @@ export const useStyles = makeStyles((theme) => ({
   orange: {
     color: theme.palette.getContrastText(deepOrange[500]),
     backgroundColor: deepOrange[500],
+  },
+  marginLeft: {
+    marginLeft: theme.spacing(1),
   },
 }));
