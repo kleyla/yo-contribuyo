@@ -4,12 +4,10 @@ import {
   Avatar,
   Button,
   Toolbar,
-  IconButton,
   Menu,
   MenuItem,
 } from "@material-ui/core";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { useStyles } from "../../hooks/useStyles";
@@ -19,6 +17,7 @@ import { useSelector } from "react-redux";
 export const Navbar = ({ isAuthenticated }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const { name, photoURL } = useSelector((state) => state.auth);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -33,6 +32,11 @@ export const Navbar = ({ isAuthenticated }) => {
 
   const handleLogout = () => {
     dispatch(startLogout());
+  };
+
+  const redirectToMyProgress = () => {
+    history.push("/my-progress");
+    handleClose();
   };
 
   return (
@@ -62,15 +66,17 @@ export const Navbar = ({ isAuthenticated }) => {
 
         {isAuthenticated ? (
           <div>
-            <IconButton
+            <Button
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleMenu}
+              variant="text"
               color="inherit"
+              onClick={handleMenu}
             >
+              {name}&nbsp;
               <Avatar alt="Remy Sharp" src={photoURL} />
-            </IconButton>
+            </Button>
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
@@ -87,7 +93,7 @@ export const Navbar = ({ isAuthenticated }) => {
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>Perfil</MenuItem>
-              <MenuItem onClick={handleClose}>Mi avace</MenuItem>
+              <MenuItem onClick={redirectToMyProgress}>Mi avace</MenuItem>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </div>
