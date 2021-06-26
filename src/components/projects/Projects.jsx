@@ -12,7 +12,6 @@ import {
   Link,
   Typography,
 } from "@material-ui/core";
-import { useSelector } from "react-redux";
 
 import { API } from "../../helpers/githubApis";
 import { useStyles } from "../../hooks/useStyles";
@@ -25,7 +24,7 @@ export const Projects = () => {
   const [repositories, setRepositories] = useState([]);
 
   const getRepositories = async (language, label) => {
-    if (language != "" || label != "") {
+    if (language !== "" || label !== "") {
       const url = `${API}language:${language} good-first-issues:>1 help-wanted-issues:>1`;
 
       fetch(url)

@@ -9,10 +9,7 @@ import {
   CircularProgress,
   Chip,
   Grid,
-  Link,
   List,
-  ListItem,
-  ListItemText,
   Typography,
 } from "@material-ui/core";
 import AssignmentIcon from "@material-ui/icons/Assignment";
@@ -62,7 +59,7 @@ export const MyProgress = () => {
   };
 
   const checkPullMerged = (pull) => {
-    if (pull.user.login === nick && pull.merged_at != "") {
+    if (pull.user.login === nick && pull.merged_at !== "") {
       setMyPullRequestsClosed((myPRs) => [...myPRs, pull]);
     }
     return;
